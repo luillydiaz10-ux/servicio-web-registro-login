@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba - Servicio Web Registro y Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container my-5" style="max-width: 500px;">
+    <h3 class="mb-4 text-center">Prueba del Servicio Web</h3>
+    <span class="d-block text-center text-muted mb-4">Evidencia GA7-220501096-AA5-EV01</span>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-dark text-white">1. Registro</div>
+        <div class="card-body">
+            <input id="reg-usuario" class="form-control mb-2" placeholder="Usuario">
+            <input id="reg-contrasena" type="password" class="form-control mb-2" placeholder="Contraseña">
+            <button class="btn btn-success w-100" onclick="registrar()">Registrar</button>
+            <div id="reg-resultado" class="mt-2"></div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">2. Inicio de sesión</div>
+        <div class="card-body">
+            <input id="log-usuario" class="form-control mb-2" placeholder="Usuario">
+            <input id="log-contrasena" type="password" class="form-control mb-2" placeholder="Contraseña">
+            <button class="btn btn-primary w-100" onclick="login()">Iniciar sesión</button>
+            <div id="log-resultado" class="mt-2"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// URL base del servicio web (misma máquina, puerto 3000)
+const API_URL = "http://localhost:3000/api";
+
+// Función que envía los datos de registro al servicio web
+async function registrar() {
+    const usuario = document.getElementById("reg-usuario").value;
+    const contrasena = document.getElementById("reg-contrasena").value;
+
+    const respuesta = await fetch(`${API_URL}/registro`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, contrasena })
+    });
+    const datos = await respuesta.json();
+    mostrarResultado("reg-resultado", datos);
+}
+
+// Función que envía las credenciales de inicio de sesión al servicio web
+async function login() {
+    const usuario = document.getElementById("log-usuario").value;
+    const contrasena = document.getElementById("log-contrasena").value;
+
+    const respuesta = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ usuario, contrasena })
+    });
+    const datos = await respuesta.json();
+    mostrarResultado("log-resultado", datos);
+}
+
+// Muestra el mensaje devuelto por el servicio, con color según el estado
+function mostrarResultado(idContenedor, datos) {
+    const contenedor = document.getElementById(idContenedor);
+    const clase = datos.estado === "exito" ? "alert-success" : "alert-danger";
+    contenedor.innerHTML = `<div class="alert ${clase} py-2 mb-0">${datos.mensaje}</div>`;
+}
+</script>
+</body>
+</html>
