@@ -1,0 +1,18 @@
+{
+  "name": "servicio-web-registro-login",
+  "version": "1.0.0",
+  "description": "Evidencia GA7-220501096-AA5-EV01 - Servicio web (API REST) de Registro e Inicio de Sesion",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": ["api", "rest", "registro", "login", "autenticacion"],
+  "author": "Andrey Esteban Cano Puerta",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5"
+  }
+}
