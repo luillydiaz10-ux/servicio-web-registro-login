@@ -1,4 +1,4 @@
-# Servicio Web de Registro e Inicio de Sesión
+# Servicio Web de Registro e Inicio de Sesión - Postman API
 
 **Evidencia:** GA7-220501096-AA5-EV01 — Diseño y desarrollo de servicios web - caso // API. GA7-220501096-AA5-EV02. - Crea servicios web para disponer de métodos reutilizables en el software. 
 **Componente formativo:** Construcción API
